@@ -18,7 +18,7 @@ const DeleteTask = ({id})=>{
                     Alert("tarea eliminada correctamente")
                 }
 
-            } >Eliminar</button>
+            } > <i className="material-icons left">delete</i> Eliminar</button>
 
         </>
     )

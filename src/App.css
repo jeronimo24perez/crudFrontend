@@ -9,3 +9,7 @@
 .dropdown-overlay {
     display: none !important;
 }
+.task-action{
+    border-radius: 30px;
+    margin-right: 20px;
+}

@@ -1,7 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers, login} from "../state/usersSlice.jsx";
+import {getUsers, login, postUser} from "../state/usersSlice.jsx";
 import M from 'materialize-css';
 import {useEffect, useState} from "react";
+import Alert from "../ui/alert.jsx";
 
 const Login = ()=>{
     const users = useSelector(state => state.login)
@@ -29,28 +30,45 @@ const Login = ()=>{
     }
     const fetcher =  ( username, email ,password)=>{
         if(username){
-            console.log('hay que registrar')
-        }else{
+            const userFinder = users.users.find(user => user.user.email === email)
+            if(userFinder){
+                Alert("ya existe el usuario", "red darken-4")
+            }else{
+                console.log(username, "fet")
+                dispatch(postUser({username: username, email: email, password: password}));
+                Alert("Registro completado, Inicia sesion", "green darken-3")
+
+            }
+
+        }
+        else{
             dispatch(getUsers())
             const userFinder = users.users.find(user => user.user.email === email)
+            if (userFinder){
+                if(userFinder.user.password === password){
+                    console.log(userFinder._id)
+                    dispatch(login({
+                        id: userFinder._id,
+                        login: true,
+                        username: userFinder.user.username,
+                    }))
+                    localStorage.setItem("id", userFinder._id)
+                    localStorage.setItem("username", userFinder.user.username)
+                    localStorage.setItem("login", "true")
+                    Alert("Sesion Iniciada", "green darken-3")
 
-            if(userFinder.user.password === password){
-                dispatch(login({
-                    login: true,
-                    username: userFinder.user.username,
-                }))
-                localStorage.setItem("username", userFinder.user.username)
-                localStorage.setItem("login", "true")
-                const elem = document.querySelector('#modal-login');
-                const instance = M.Modal.getInstance(elem);
-                if (instance) {
-                    instance.close();
+                }else{
+                    Alert("contrasena incorrecta", "red darken-4")
                 }
+            }else{
+                Alert("email incorrecto", "red darken-4" )
             }
+
         }
     }
     return (
         <>
+
             <li>
                 <a href="#modal-login" className= "modal-trigger waves-effect grey-text text-darken-4 " onClick={()=>
                     dispatch(getUsers())
@@ -149,13 +167,15 @@ const Login = ()=>{
                         Cancelar
                     </a>
 
-                    <button className="waves-effect waves-light btn light-blue darken-4" onClick={()=>{
+                    <button className="waves-effect modal-close waves-light btn light-blue darken-4" onClick={()=>{
                         if(registed && form.email.length > 3 && form.password.length > 3){
                             fetcher(null , form.email, form.password)
                         }else if(form.username.length > 3 && form.email.length > 3 && form.password.length > 3){
                             fetcher(form.username, form.email, form.password)
+
+
                         }else{
-                            alert('campos faltantes')
+                            Alert('campos incompletos', "red darken-4" )
                         }
 
                     }} type="submit">

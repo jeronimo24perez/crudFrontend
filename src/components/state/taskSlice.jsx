@@ -16,7 +16,8 @@ const taskSlice = createSlice({
             state.task = []
         }).addCase(addTask.fulfilled, (state, action) => {
            state.task = action.payload.tasks;
-
+        }).addCase(deleteTask.fulfilled, (state, action) => {
+            state.task = action.payload.tasks;
         })
     }
 })
@@ -47,4 +48,20 @@ export const addTask = createAsyncThunk(
 
     }
 )
+export const deleteTask = createAsyncThunk(
+    "task/deleteTask",
+    async (arg ) => {
+        const taskId = arg.taskId;
+        const userId = arg.userId;
+        const task = await fetch(`https://crud-backend-eosin.vercel.app/${userId}/${taskId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        return await task.json();
+    }
+)
+
 export default  taskSlice.reducer;

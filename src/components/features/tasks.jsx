@@ -1,3 +1,5 @@
+import DeleteTask from "./deleteTask.jsx";
+
 const Tasks = ({name, date, topic, id} )=>{
     return (
         <>
@@ -28,7 +30,7 @@ const Tasks = ({name, date, topic, id} )=>{
                         {/* Acciones de la tarjeta (Buttons) */}
                         <div className="card-action">
                             <button  className="btn blue darken-4 task-action" >Editar</button>
-                            <button className=" btn red darken-4 task-action">Eliminar</button>
+                            <DeleteTask id={id} />
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ const CreateTask = ()=>{
         const dateElems = document.querySelectorAll('.datepicker');
         M.Datepicker.init(dateElems, {
             format: 'dd mmm, yyyy',
+            container: document.body,
             onSelect: (date) => {
                 // Usamos la función de actualización (prev) para evitar la dependencia
                 setTaskData(prev => ({ ...prev, date: date.toLocaleDateString() }));
@@ -81,14 +82,14 @@ const CreateTask = ()=>{
 
                                 {/* Campo: Fecha (Pickers) */}
                                 <div className="row container">
-                                    <div className="input-field col s6">
+                                    <div className="input-field col m6 s12">
                                         <i className="material-icons prefix">today</i>
                                         <input id="task_date" type="text" className="datepicker" />
                                         <label htmlFor="task_date">Fecha límite</label>
                                     </div>
 
                                     {/* Campo: Tema (Text Inputs / Icons) */}
-                                    <div className="input-field col s6">
+                                    <div className="input-field col m6 s12">
                                         <i className="material-icons prefix">label</i>
                                         <input
                                             id="task_topic"

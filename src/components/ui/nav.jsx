@@ -42,7 +42,7 @@ const Nav = () => {
                 <nav className="light-blue lighten-5">
                     <div className="nav-wrapper container">
 
-                        <a className="brand-logo left" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                        <a className="brand-logo left logo" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
                             <img
                                 src={logo}
                                 alt="Logo"
@@ -84,9 +84,7 @@ const Nav = () => {
                                             listStyle: "none"
                                         }}
                                     >
-                                        <li style={{ padding: "10px 20px", cursor: "pointer" }}>
-                                            <i className="material-icons left">edit</i> Editar
-                                        </li>
+
 
                                         <li
                                             onClick={handleLogout}

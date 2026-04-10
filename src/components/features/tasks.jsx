@@ -1,4 +1,5 @@
 import DeleteTask from "./deleteTask.jsx";
+import EditTask from "./editTask.jsx";
 
 const Tasks = ({name, date, topic, id} )=>{
     return (
@@ -29,7 +30,11 @@ const Tasks = ({name, date, topic, id} )=>{
 
                         {/* Acciones de la tarjeta (Buttons) */}
                         <div className="card-action">
-                            <button  className="btn blue darken-4 task-action" >Editar</button>
+                            <EditTask id={id} currentTask={{
+                                name: name,
+                                date: date,
+                                topic: topic,
+                            }} />
                             <DeleteTask id={id} />
                         </div>
                     </div>

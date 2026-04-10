@@ -13,3 +13,10 @@
     border-radius: 30px;
     margin-right: 20px;
 }
+.logo{
+    cursor: pointer;
+    transition: transform .4s ease;
+}
+.logo:hover{
+    transform: scale(0.9);
+}

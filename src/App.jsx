@@ -30,7 +30,11 @@ function App() {
   return (
       <>
             <Nav />
-          {(task.task.map(e => <Tasks name={e.title} date={e.date} topic={e.theme} key={e.taskId} id={e.taskId}/>))}
+          {(task.task.map(e => <Tasks name={e.title} date={e.date} topic={e.theme} key={e.taskId} id={e.taskId} currentTask={{
+              name: e.title,
+              date: e.date,
+              topic: e.theme
+          }} />))}
           <CreateTask />
       </>
   )
